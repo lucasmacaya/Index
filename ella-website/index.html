@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ella Fontanals-Cisneros</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* Design Switcher */
+        .design-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .design-switcher button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .design-switcher button:hover,
+        .design-switcher button.active {
+            background: #ff6b35;
+        }
+
+        /* Hide designs by default */
+        .design {
+            display: none;
+        }
+
+        .design.active {
+            display: block;
+        }
+
+        /* ==================== DESIGN 1: EDITORIAL MAGAZINE STYLE ==================== */
+        #design1 {
+            background: #f9f9f9;
+        }
+
+        /* Design 1 Header */
+        #design1 .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            z-index: 1000;
+            border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        #design1 .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+        }
+
+        #design1 .logo {
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        #design1 .logo span {
+            font-weight: 600;
+        }
+
+        #design1 .nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        #design1 .nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        #design1 .nav a:hover {
+            color: #ff6b35;
+        }
+
+        /* Design 1 Hero Section */
+        #design1 .hero {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: calc(100vh - 80px);
+        }
+
+        #design1 .hero-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            background: white;
+        }
+
+        #design1 .hero-subtitle {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ff6b35;
+            margin-bottom: 20px;
+        }
+
+        #design1 .hero-title {
+            font-size: 72px;
+            line-height: 1;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        #design1 .hero-description {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        #design1 .hero-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        #design1 .hero-cta:hover {
+            background: #ff6b35;
+            transform: translateX(5px);
+        }
+
+        #design1 .hero-image {
+            background: url('images/image3.jpg') center/cover;
+            position: relative;
+        }
+
+        /* Design 1 Gallery Section */
+        #design1 .gallery-section {
+            padding: 120px 60px;
+            background: white;
+        }
+
+        #design1 .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        #design1 .section-title {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        #design1 .section-subtitle {
+            font-size: 16px;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        #design1 .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        #design1 .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f5f5f5;
+            aspect-ratio: 4/5;
+        }
+
+        #design1 .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        #design1 .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        #design1 .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        #design1 .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        /* Design 1 Feature Section */
+        #design1 .feature-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            padding: 120px 60px;
+            background: #f9f9f9;
+        }
+
+        #design1 .feature-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #design1 .feature-tag {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ff6b35;
+            margin-bottom: 20px;
+        }
+
+        #design1 .feature-title {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        #design1 .feature-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        #design1 .feature-image {
+            background: url('images/image1.jpg') center/cover;
+            min-height: 600px;
+        }
+
+        /* Design 1 Quote Section */
+        #design1 .quote-section {
+            padding: 120px 60px;
+            background: white;
+            text-align: center;
+        }
+
+        #design1 .quote {
+            font-size: 36px;
+            font-weight: 300;
+            font-style: italic;
+            max-width: 900px;
+            margin: 0 auto 40px;
+            line-height: 1.4;
+        }
+
+        #design1 .quote-author {
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+        }
+
+        /* ==================== DESIGN 2: MODERN ART GALLERY STYLE ==================== */
+        #design2 {
+            background: #000;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Design 2 Navigation */
+        #design2 .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 100vh;
+            background: #111;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 0;
+            z-index: 1000;
+        }
+
+        #design2 .nav-logo {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 18px;
+            letter-spacing: 3px;
+            font-weight: 300;
+        }
+
+        #design2 .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        #design2 .nav-menu a {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        #design2 .nav-menu a:hover {
+            opacity: 1;
+        }
+
+        #design2 .nav-social {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        #design2 .nav-social a {
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        #design2 .nav-social a:hover {
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        /* Design 2 Main Content */
+        #design2 .main-content {
+            margin-left: 80px;
+        }
+
+        /* Design 2 Hero */
+        #design2 .hero-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #design2 .hero-slider {
+            display: flex;
+            height: 100%;
+        }
+
+        #design2 .hero-slide {
+            flex: 0 0 100%;
+            position: relative;
+        }
+
+        #design2 .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        #design2 .hero-content {
+            position: absolute;
+            bottom: 80px;
+            left: 80px;
+            max-width: 600px;
+        }
+
+        #design2 .hero-number {
+            font-size: 120px;
+            font-weight: 100;
+            opacity: 0.3;
+            margin-bottom: -30px;
+        }
+
+        #design2 .hero-title {
+            font-size: 64px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        #design2 .hero-subtitle {
+            font-size: 18px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        /* Design 2 Grid Gallery */
+        #design2 .grid-section {
+            padding: 120px 80px;
+        }
+
+        #design2 .grid-header {
+            margin-bottom: 60px;
+        }
+
+        #design2 .grid-title {
+            font-size: 48px;
+            font-weight: 100;
+            margin-bottom: 20px;
+        }
+
+        #design2 .grid-description {
+            font-size: 16px;
+            opacity: 0.7;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        #design2 .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            grid-auto-flow: dense;
+        }
+
+        #design2 .grid-item {
+            position: relative;
+            overflow: hidden;
+            background: #111;
+        }
+
+        #design2 .grid-item.tall {
+            grid-row: span 2;
+        }
+
+        #design2 .grid-item.wide {
+            grid-column: span 2;
+        }
+
+        #design2 .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+
+        #design2 .grid-item:hover img {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        #design2 .grid-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        #design2 .grid-item:hover .grid-info {
+            transform: translateY(0);
+        }
+
+        #design2 .grid-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        #design2 .grid-subtitle {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        /* Design 2 About Section */
+        #design2 .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+        }
+
+        #design2 .about-image {
+            background: url('images/image6.jpg') center/cover;
+            position: relative;
+        }
+
+        #design2 .about-content {
+            padding: 120px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #111;
+        }
+
+        #design2 .about-tag {
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 40px;
+        }
+
+        #design2 .about-title {
+            font-size: 48px;
+            font-weight: 100;
+            margin-bottom: 40px;
+            line-height: 1.2;
+        }
+
+        #design2 .about-text {
+            font-size: 16px;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+
+        #design2 .about-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            border-bottom: 1px solid white;
+            transition: all 0.3s;
+        }
+
+        #design2 .about-link:hover {
+            padding-left: 10px;
+            border-color: #ff6b35;
+            color: #ff6b35;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            #design1 .hero {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            #design1 .hero-text {
+                padding: 60px 40px;
+            }
+
+            #design1 .hero-image {
+                height: 500px;
+            }
+
+            #design1 .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            #design2 .nav-sidebar {
+                width: 60px;
+            }
+
+            #design2 .main-content {
+                margin-left: 60px;
+            }
+
+            #design2 .hero-content {
+                left: 40px;
+                bottom: 40px;
+            }
+
+            #design2 .hero-title {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .design-switcher {
+                top: auto;
+                bottom: 20px;
+                right: 50%;
+                transform: translateX(50%);
+            }
+
+            #design1 .header-content {
+                padding: 20px;
+            }
+
+            #design1 .nav {
+                display: none;
+            }
+
+            #design1 .hero-title {
+                font-size: 48px;
+            }
+
+            #design1 .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            #design1 .feature-section {
+                grid-template-columns: 1fr;
+            }
+
+            #design2 .nav-sidebar {
+                display: none;
+            }
+
+            #design2 .main-content {
+                margin-left: 0;
+            }
+
+            #design2 .grid-section {
+                padding: 60px 20px;
+            }
+
+            #design2 .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            #design2 .about-content {
+                padding: 60px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Design Switcher -->
+    <div class="design-switcher">
+        <button onclick="switchDesign(1)" class="active">Editorial Style</button>
+        <button onclick="switchDesign(2)">Gallery Style</button>
+    </div>
+
+    <!-- ==================== DESIGN 1: EDITORIAL MAGAZINE STYLE ==================== -->
+    <div id="design1" class="design active">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    Ella <span>Fontanals-Cisneros</span>
+                </div>
+                <nav class="nav">
+                    <a href="#about">About</a>
+                    <a href="#collection">Collection</a>
+                    <a href="#foundation">Foundation</a>
+                    <a href="#exhibitions">Exhibitions</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-text">
+                <div class="hero-subtitle">Art Collector & Philanthropist</div>
+                <h1 class="hero-title">Bridging Cultures Through Art</h1>
+                <p class="hero-description">
+                    For over four decades, I have dedicated my life to promoting contemporary Latin American art 
+                    and fostering cultural dialogue between communities worldwide.
+                </p>
+                <a href="#collection" class="hero-cta">Explore Collection →</a>
+            </div>
+            <div class="hero-image"></div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="section-header">
+                <h2 class="section-title">The Collection</h2>
+                <p class="section-subtitle">
+                    Over 2,700 works spanning geometric abstraction, contemporary art, video installations, 
+                    and photography from Latin America and beyond.
+                </p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/image1.jpg" alt="Industrial Geometries">
+                    <div class="gallery-overlay">
+                        <h3>Industrial Geometries</h3>
+                        <p>Contemporary Mixed Media</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/image2.jpg" alt="Black & White Series">
+                    <div class="gallery-overlay">
+                        <h3>Geometric Abstraction</h3>
+                        <p>Latin American Masters</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/image4.jpg" alt="Contemporary Works">
+                    <div class="gallery-overlay">
+                        <h3>Contemporary Dialogues</h3>
+                        <p>Cross-Cultural Exchange</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Section -->
+        <section class="feature-section">
+            <div class="feature-content">
+                <div class="feature-tag">The Foundation</div>
+                <h2 class="feature-title">CIFO: Cisneros Fontanals Art Foundation</h2>
+                <p class="feature-text">
+                    Established in 2002, CIFO has become a vital platform for Latin American artists, 
+                    providing grants, commissions, and exhibitions that have reached audiences from 
+                    Miami to Madrid, São Paulo to Zurich.
+                </p>
+                <p class="feature-text">
+                    Our mission extends beyond collecting—we're building bridges between cultures, 
+                    supporting emerging artists, and ensuring that Latin American voices are heard 
+                    on the global stage.
+                </p>
+            </div>
+            <div class="feature-image"></div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <blockquote class="quote">
+                "Art has the power to transcend borders and unite humanity. Through CIFO, 
+                we're not just preserving art—we're cultivating understanding and fostering 
+                dialogue across cultures."
+            </blockquote>
+            <p class="quote-author">— Ella Fontanals-Cisneros</p>
+        </section>
+    </div>
+
+    <!-- ==================== DESIGN 2: MODERN ART GALLERY STYLE ==================== -->
+    <div id="design2" class="design">
+        <!-- Sidebar Navigation -->
+        <nav class="nav-sidebar">
+            <div class="nav-logo">ELLA FONTANALS-CISNEROS</div>
+            <div class="nav-menu">
+                <a href="#home">HOME</a>
+                <a href="#works">WORKS</a>
+                <a href="#about">ABOUT</a>
+                <a href="#cifo">CIFO</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            <div class="nav-social">
+                <a href="#"><span style="font-size: 14px;">f</span></a>
+                <a href="#"><span style="font-size: 14px;">t</span></a>
+                <a href="#"><span style="font-size: 14px;">i</span></a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-slider">
+                    <div class="hero-slide">
+                        <img src="images/image5.jpg" alt="Featured Work">
+                        <div class="hero-content">
+                            <div class="hero-number">01</div>
+                            <h1 class="hero-title">Contemporary Vision</h1>
+                            <p class="hero-subtitle">
+                                Four decades of collecting, curating, and championing 
+                                Latin American contemporary art on the global stage.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grid Gallery -->
+            <section class="grid-section">
+                <div class="grid-header">
+                    <h2 class="grid-title">Selected Works</h2>
+                    <p class="grid-description">
+                        A curated selection from the Ella Fontanals-Cisneros Collection, 
+                        featuring over 2,700 works by leading contemporary artists.
+                    </p>
+                </div>
+                <div class="masonry-grid">
+                    <div class="grid-item tall">
+                        <img src="images/image1.jpg" alt="Industrial Series">
+                        <div class="grid-info">
+                            <h3 class="grid-title">Industrial Series</h3>
+                            <p class="grid-subtitle">Mixed Media Installation</p>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="images/image2.jpg" alt="Geometric Patterns">
+                        <div class="grid-info">
+                            <h3 class="grid-title">Geometric Patterns</h3>
+                            <p class="grid-subtitle">Contemporary Abstraction</p>
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <img src="images/image3.jpg" alt="Portrait Series">
+                        <div class="grid-info">
+                            <h3 class="grid-title">The Collector</h3>
+                            <p class="grid-subtitle">Portrait Photography</p>
+                        </div>
+                    </div>
+                    <div class="grid-item wide">
+                        <img src="images/image4.jpg" alt="Color Studies">
+                        <div class="grid-info">
+                            <h3 class="grid-title">Color Studies</h3>
+                            <p class="grid-subtitle">Contemporary Works</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="about-section">
+                <div class="about-image"></div>
+                <div class="about-content">
+                    <div class="about-tag">The Journey</div>
+                    <h2 class="about-title">From Cuba to the World</h2>
+                    <p class="about-text">
+                        Born in Cuba, raised in Venezuela, and now a global advocate for Latin American art. 
+                        My journey began with teaching water ballet and evolved into founding one of the most 
+                        significant platforms for contemporary Latin American artists.
+                    </p>
+                    <p class="about-text">
+                        Through CIFO and my personal collection, I've worked to ensure that the voices of 
+                        Latin American artists resonate in museums, galleries, and hearts worldwide—from 
+                        the Metropolitan Museum of Art to the Tate Modern.
+                    </p>
+                    <a href="#" class="about-link">Read Full Story</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function switchDesign(num) {
+            // Hide all designs
+            document.querySelectorAll('.design').forEach(d => {
+                d.classList.remove('active');
+            });
+            
+            // Show selected design
+            document.getElementById(`design${num}`).classList.add('active');
+            
+            // Update button states
+            document.querySelectorAll('.design-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Change body background
+            document.body.style.background = num === 1 ? '#f9f9f9' : '#000';
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
